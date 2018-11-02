@@ -39,6 +39,11 @@ class Film
     return customers_data.map{|customer| Customer.new(customer)}
   end
 
+  def count_attending_customers()
+    customers_data = attending_customers()
+    return customers_data.count
+  end
+
   def self.all()
   sql = "SELECT * FROM films"
   data = SqlRunner.run(sql)
