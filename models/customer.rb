@@ -1,4 +1,6 @@
 require_relative('../db/SqlRunner')
+require_relative('ticket')
+require_relative('film')
 
 class Customer
   attr_accessor :name, :funds
@@ -30,6 +32,13 @@ class Customer
     SqlRunner.run(sql, values)
   end
 
+  def buy_ticket(film)
+    options = {'customer_id' => @id, 'film_id' =>film.id}
+    new_ticket = Ticket.new(options)
+    new_ticket.save()
+    decrease_funds(film.price)
+  end
+
   def booked_films()
     sql = "SELECT films.* FROM films
     INNER JOIN tickets
@@ -38,6 +47,11 @@ class Customer
     values = [@id]
     films = SqlRunner.run(sql, values)
     return films.map{|film| Film.new(film)}
+  end
+
+  def decrease_funds(ticket_price)
+    @funds -= ticket_price
+    self.update()
   end
 
   def self.all()

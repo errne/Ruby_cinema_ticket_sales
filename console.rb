@@ -29,13 +29,16 @@ film2.update()
 ticket1 = Ticket.new({'customer_id' => cust1.id, 'film_id' => film1.id})
 ticket2 = Ticket.new({'customer_id' => cust2.id, 'film_id' => film2.id})
 ticket3 = Ticket.new({'customer_id' => cust3.id, 'film_id' => film2.id})
-ticket1.customer_id = cust2.id
-ticket1.update()
+# ticket1.customer_id = cust2.id
+# ticket1.update()
 
 
 ticket1.save()
+# cust1.decrease_funds(film1.price)
+# cust1.update()
 ticket2.save()
 ticket3.save()
+cust1.buy_ticket(film2)
 
 # p cust2.booked_films()
-p film2.attending_customers()
+# p film2.attending_customers()
