@@ -39,6 +39,7 @@ ticket1.save()
 ticket2.save()
 ticket3.save()
 cust1.buy_ticket(film2)
+p cust1.number_of_tickets_own()
 
 # p cust2.booked_films()
 # p film2.attending_customers()

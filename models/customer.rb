@@ -54,6 +54,14 @@ class Customer
     self.update()
   end
 
+  def number_of_tickets_own()
+    sql = "SELECT * FROM tickets where customer_id = $1"
+    values = [@id]
+    tickets_data = SqlRunner.run(sql, values)
+    number_of_tickets = tickets_data.map {|ticket| ticket['id']}
+    return number_of_tickets.count
+  end
+
   def self.all()
     sql = "SELECT * FROM customers"
     data = SqlRunner.run(sql)
