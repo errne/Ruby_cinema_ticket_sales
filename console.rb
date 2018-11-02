@@ -1,6 +1,7 @@
 require_relative('models/customer')
 require_relative('models/film')
 require_relative('models/ticket')
+require_relative('models/screening')
 
 Ticket.delete_all
 Customer.delete_all
@@ -26,21 +27,24 @@ film2.save()
 film2.title = "Down"
 film2.update()
 
-ticket1 = Ticket.new({'customer_id' => cust1.id, 'film_id' => film1.id})
-ticket2 = Ticket.new({'customer_id' => cust2.id, 'film_id' => film2.id})
-ticket3 = Ticket.new({'customer_id' => cust3.id, 'film_id' => film2.id})
+screen1 = Screening.new({'film_id' => film1.id, 'times' => "18:00"})
+screen1.save()
+
+ ticket1 = Ticket.new({'customer_id' => cust1.id, 'screening_id' => screen1.id})
+# ticket2 = Ticket.new({'customer_id' => cust2.id, 'screen_id' => screen1.id})
+# ticket3 = Ticket.new({'customer_id' => cust3.id, 'screen_id' => screen1.id})
 # ticket1.customer_id = cust2.id
 # ticket1.update()
 
 
-ticket1.save()
+ ticket1.save()
 # cust1.decrease_funds(film1.price)
 # cust1.update()
-ticket2.save()
-ticket3.save()
-cust1.buy_ticket(film2)
-p cust1.number_of_tickets_own()
-p film2.count_attending_customers()
+# ticket2.save()
+# ticket3.save()
+# cust1.buy_ticket(film2)
+# p cust1.number_of_tickets_own()
+# p film2.count_attending_customers()
 
 # p cust2.booked_films()
 # p film2.attending_customers()
