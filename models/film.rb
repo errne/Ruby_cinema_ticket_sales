@@ -29,6 +29,21 @@ class Film
     SqlRunner.run(sql, values)
   end
 
+  def all_screenings()
+    sql = "SELECT screenings.* FROM screenings
+    WHERE film_id = $1"
+    values = [@id]
+    screens_data = SqlRunner.run(sql, values)
+    return screens_data.map{|screen| Screening.new(screen)}
+  end
+
+  def most_popular_time()
+    screens_data = all_screenings()
+    # screens_data.sort_by! { |screen| screen.count_attending_customers}
+    # return screens_data[-1].times
+    return screens_data.max_by{|screen| screen.count_attending_customers }.times
+  end
+
   def self.all()
   sql = "SELECT * FROM films"
   data = SqlRunner.run(sql)
