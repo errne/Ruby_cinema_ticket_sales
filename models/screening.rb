@@ -38,6 +38,21 @@ class Screening
     return film_price = film_data[0]['price'].to_i
   end
 
+  def attending_customers()
+    sql = "SELECT customers.* FROM customers
+    INNER JOIN tickets
+    ON customers.id = tickets.customer_id
+    WHERE screening_id = $1"
+    values = [@id]
+    customers_data = SqlRunner.run(sql, values)
+    return customers_data.map{|customer| Customer.new(customer)}
+  end
+
+  def count_attending_customers()
+    customers_data = attending_customers()
+    return customers_data.count
+  end
+
   def self.all()
     sql = "SELECT * FROM screening"
     data = SqlRunner.run(sql)

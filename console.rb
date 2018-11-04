@@ -44,10 +44,15 @@ screen2.save()
 # ticket2.save()
 # ticket3.save()
 cust1.buy_ticket(screen2)
+cust1.buy_ticket(screen1)
+cust2.buy_ticket(screen1)
+cust3.buy_ticket(screen1)
 # binding.pry
 # nil
 
-# p cust1.number_of_tickets_own()
+p cust1.number_of_tickets_own()
+p screen1.attending_customers()
+p screen1.count_attending_customers
 # p film2.count_attending_customers()
 
 # p cust2.booked_films()
