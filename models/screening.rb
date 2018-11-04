@@ -30,6 +30,14 @@ class Screening
     SqlRunner.run(sql, values)
   end
 
+  def get_film_price()
+    sql = "SELECT * FROM films
+    WHERE films.id = $1" #screenings.film_id"
+    values = [@film_id]
+    film_data = SqlRunner.run(sql, values)
+    return film_price = film_data[0]['price'].to_i
+  end
+
   def self.all()
     sql = "SELECT * FROM screening"
     data = SqlRunner.run(sql)

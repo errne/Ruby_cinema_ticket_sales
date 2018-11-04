@@ -32,13 +32,13 @@ class Customer
     SqlRunner.run(sql, values)
   end
 
-  # def buy_ticket(film)
-  #   options = {'customer_id' => @id, 'film_id' =>film.id}
-  #   new_ticket = Ticket.new(options)
-  #   new_ticket.save()
-  #   decrease_funds(film.price)
-  # end
-  #
+  def buy_ticket(screening)
+    options = {'customer_id' => @id, 'screening_id' => screening.id}
+    new_ticket = Ticket.new(options)
+    new_ticket.save()
+    decrease_funds(screening.get_film_price())
+  end
+
   # def booked_films()
   #   sql = "SELECT films.* FROM films
   #   INNER JOIN tickets
