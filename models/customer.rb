@@ -33,10 +33,13 @@ class Customer
   end
 
   def buy_ticket(screening)
+    return if @funds < screening.get_film_price()
+    return if screening.spaces_left == 0
     options = {'customer_id' => @id, 'screening_id' => screening.id}
     new_ticket = Ticket.new(options)
     new_ticket.save()
     decrease_funds(screening.get_film_price())
+    screening.reduce_spaces_left
   end
 
   # def booked_films()

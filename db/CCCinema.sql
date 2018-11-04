@@ -18,7 +18,8 @@ CREATE TABLE films (
 CREATE TABLE screenings (
   id SERIAL4 PRIMARY KEY,
   film_id INT4 REFERENCES films(id) ON DELETE CASCADE,
-  times VARCHAR(255)
+  times VARCHAR(255),
+  spaces_left INT4
 );
 
 CREATE TABLE tickets (
